@@ -1,0 +1,118 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+header{
+    background-color: #1d4ed8;
+    color: white;
+    text-align: center;
+    padding: 30px, 20px;
+}
+header h1 {
+    margin: 0 0 10px;
+}
+
+header p {
+    margin: 0;
+}
+main{
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+section {
+    margin-bottom: 35px;
+}
+.summary-cards{
+    display: flex;
+    gap:20px;
+    flex-wrap: wrap;
+}
+
+.card{
+    flex: 1;
+    min-width: 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px #00000010;
+}
+.card h3{
+    font-size: 16px;
+    color: #64748b;
+}
+.card p {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1d4ed8;
+    margin-bottom: 0;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+th, td{
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+th{
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+tbody tr:hover {
+    background-color: #eff6ff;
+}
+@media (max-width: 600px) {
+    .summary-cards {
+        flex-direction: column;
+    }
+
+    main {
+        padding: 0 12px;
+    }
+
+    th,
+    td {
+        padding: 9px 6px;
+        font-size: 13px;
+    }
+}
+#student-form{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    max-width: 450px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+#student-form input{
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 16px;
+}
+#student-form button{
+    padding: 12px;
+    background-color: #1d4ed8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+#student-form button:hover{
+    background-color: #1e40af;
+}
+.add-student h2 {
+    text-align: center;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Dashboard</title>
+        <link rel="stylesheet" href="web1.css">
+        <script src="web1.js" defer></script>
+    </head>
+    <body>
+
+        <header>
+            <h1>Student Dashboard</h1>
+            <p>Manage and review student peformance</p>
+        </header>
+
+        <main>
+            <section class="summary">
+                <h2>Class Overview</h2>
+
+                <div class="summary-cards">
+                    <div class="card">
+                        <h3>Total Students</h3>
+                        <p id="total-students">0</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Class Average</h3>
+                        <p id="class-average">0</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Topper</h3>
+                        <p id="topper">Not available</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="add-student">
+                <h2>Register a Student</h2>
+
+                <form id="student-form">
+                    <label for="student-name">Student Name</label>
+                    <input
+                        type="text"
+                        id="student-name"
+                        placeholder="Enter student name"
+                        required
+                    >
+
+                    <label for="student-marks">Marks (0–100)</label>
+                    <input
+                        type="number"
+                        id="student-marks"
+                        placeholder="Enter marks"
+                        min="0"
+                        max="100"
+                        required
+                    >
+
+                    <button type="submit">Add Student</button>
+                </form>
+            </section>
+
+             <section class="student-list">
+                <h2>Student Records</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Marks</th>
+                            <th>Grade</th>
+                            <th>Result</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-table">
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </body>
+</html>
