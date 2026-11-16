@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "code": "CS101",
+    "title": "Intro to Python",
+    "credits": 4,
+    "capacity": 3
+  },
+  {
+    "id": 2,
+    "code": "MA101",
+    "title": "Calculus",
+    "credits": 3,
+    "capacity": 2
+  },
+  {
+    "id": 3,
+    "code": "PH101",
+    "title": "Physics",
+    "credits": 4,
+    "capacity": 3
+  },
+  {
+    "id": 4,
+    "code": "EN101",
+    "title": "English",
+    "credits": 2,
+    "capacity": 2
+  }
+]

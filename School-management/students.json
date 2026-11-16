@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Asha Rao",
+    "email": "asha@school.test",
+    "year": 1
+  },
+  {
+    "id": 2,
+    "name": "Ravi Kumar",
+    "email": "ravi@school.test",
+    "year": 2
+  },
+  {
+    "id": 3,
+    "name": "Meera Nair",
+    "email": "meera@school.test",
+    "year": 1
+  },
+  {
+    "id": 4,
+    "name": "Arjun Singh",
+    "email": "arjun@school.test",
+    "year": 3
+  },
+  {
+    "id": 5,
+    "name": "Divya Iyer",
+    "email": "divya@school.test",
+    "year": 2
+  },
+  {
+    "id": 6,
+    "name": "Nithyanand",
+    "email": "Nithyanandnaidu@school.test",
+    "year": 2
+  }
+]
