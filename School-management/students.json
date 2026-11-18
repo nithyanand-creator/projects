@@ -1,15 +1,9 @@
 [
   {
-    "id": 1,
-    "name": "Asha Rao",
-    "email": "asha@school.test",
-    "year": 1
-  },
-  {
     "id": 2,
-    "name": "Ravi Kumar",
+    "name": "Ravi K. Kumar",
     "email": "ravi@school.test",
-    "year": 2
+    "year": 3
   },
   {
     "id": 3,
@@ -31,8 +25,8 @@
   },
   {
     "id": 6,
-    "name": "Nithyanand",
-    "email": "Nithyanandnaidu@school.test",
+    "name": "Kavya Menon",
+    "email": "kavya@school.test",
     "year": 2
   }
 ]

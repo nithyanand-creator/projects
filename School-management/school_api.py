@@ -164,12 +164,10 @@ def enroll(body: EnrollmentIn):
                         if course["capacity"] == enrolled:
                             raise HTTPException(status_code=400, detail="Course is full")
                         break
-                new_id = 1
-                result = []
-                for enrollment in enrollments:
-                    result.append(enrollment["id"])
-                while new_id in result:
-                    new_id += 1
+                new_id = 0
+                for e in enrollments:
+                    if e["id"] >= new_id:
+                        new_id = e["id"] + 1
                 new_enroll = {"id": new_id, "student_id": body.student_id, "course_id": body.course_id, "grade": None}
                 enrollments.append(new_enroll)
     with open(BASE/"enrollments.json", "w", encoding="utf-8") as i:
@@ -298,18 +296,23 @@ def delete_enrollment(id: int):
 def delete_course(id: int):
     with open("courses.json", encoding="utf-8") as f:
         courses = json.load(f)
-        ids = []
-        for course in courses:
-            ids.append(course["id"])
-        if id not in ids:
-            raise HTTPException(status_code=404, detail="Course not found")
-        index = 0
-        for x, y in enumerate(courses):
-            if y["id"] == id:
-                index = x
-        del courses[index]
-        with open(BASE/ "courses.json", "w", encoding="utf-8") as f:
-            json.dump(courses, f, indent=2)
+    with open("enrollments.json", encoding="utf-8") as f:
+        enrollments = json.load(f)
+    for e in enrollments:
+        if id == e["course_id"]:
+            raise HTTPException(status_code=400, detail="Course has enrollments")
+    ids = []
+    for course in courses:
+        ids.append(course["id"])
+    if id not in ids:
+        raise HTTPException(status_code=404, detail="Course not found")
+    index = 0
+    for x, y in enumerate(courses):
+        if y["id"] == id:
+            index = x
+    del courses[index]
+    with open(BASE/ "courses.json", "w", encoding="utf-8") as f:
+        json.dump(courses, f, indent=2)
     return {"message": f"Course {id} deleted"}
 
 @app.delete("/students/{id}")
@@ -326,7 +329,79 @@ def delete_student(id: int):
             if y["id"] == id:
                 index = x
         del students[index]
-        with open(BASE/ "students.json", "w", encoding="utf-8") as f:
-            json.dump(students, f, indent=2)
-    return {"message": f"Student {id} deleted"}
+    with open(BASE/ "enrollments.json", encoding="utf-8") as f:
+        enrollments = json.load(f)
+        temp = []
+        count = 0
+        for e in enrollments:
+            if e["student_id"] != id:
+                temp.append(e)
+            else:
+                count += 1
+    with open(BASE/ "students.json", "w", encoding="utf-8") as f:
+        json.dump(students, f, indent=2)
+    with open(BASE/ "enrollments.json", "w", encoding="utf-8") as f:
+        json.dump(temp, f, indent=2)
+    return {"message": f"Student {id} deleted", "enrollments_removed": count}
 
+@app.get("/students/{id}/transcript")
+def transcription(id: int):
+    with open(BASE/ "students.json", encoding="utf-8") as f:
+        students = json.load(f)
+    with open(BASE/ "courses.json", encoding="utf-8") as f:
+        courses = json.load(f)
+    with open (BASE/ "enrollments.json", encoding="utf-8") as f:
+        enrollments = json.load(f)
+    result = []
+    for student in students:
+        result.append(student["id"])
+    if id not in result:
+        raise HTTPException(status_code=404, detail="Student not found")
+    result = []
+    total_credits = 0
+    average = 0
+    count = 0
+    for e in enrollments:
+        if e["student_id"] == id:
+            for c in courses:
+                if c["id"] == e["course_id"]:
+                    result.append({"code": c["code"], "title": c["title"], "credits": c["credits"], "grade": e["grade"]})
+    for r in result:
+        total_credits += r["credits"]
+        if r["grade"] != None:
+            average += r["grade"]
+            count += 1
+    if average:
+        average /= count
+    else:
+        average = None
+    for s in students:
+        if s["id"] == id:
+            name = s["name"]
+    return {"student": name, "courses": result, "total_credits": total_credits, "average_grade": average}
+
+@app.get("/courses/{id}/stats")
+def course_stats(id: int):
+    with open(BASE/ "courses.json", encoding="utf-8") as f:
+        courses = json.load(f)
+    with open(BASE/ "enrollments.json", encoding="utf-8") as f:
+        enrollments = json.load(f)
+    result = []
+    for c in courses:
+        result.append(c["id"])
+    if id not in result:
+        raise HTTPException(status_code=404, detail="Course not found")
+    total = 0
+    grade = 0
+    count = 0
+    for e in enrollments:
+        if e["course_id"] == id:
+            total += 1
+            if e["grade"]:
+                grade += e["grade"]
+                count += 1
+    for c in courses:
+        if c["id"] == id:
+            code = c["code"]
+            capacity = c["capacity"]
+    return {"code": code, "capacity": capacity, "enrolled": total, "seats_left": (capacity - total), "average_grade": None if not grade else grade/count}

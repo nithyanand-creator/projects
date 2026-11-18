@@ -1,38 +1,26 @@
 [
   {
-    "id": 1,
-    "student_id": 1,
-    "course_id": 1,
-    "grade": null
-  },
-  {
     "id": 2,
     "student_id": 2,
     "course_id": 1,
-    "grade": null
-  },
-  {
-    "id": 3,
-    "student_id": 3,
-    "course_id": 1,
-    "grade": null
-  },
-  {
-    "id": 4,
-    "student_id": 1,
-    "course_id": 2,
-    "grade": null
+    "grade": 60
   },
   {
     "id": 5,
     "student_id": 4,
     "course_id": 3,
-    "grade": null
+    "grade": 70
   },
   {
     "id": 6,
     "student_id": 5,
     "course_id": 4,
+    "grade": null
+  },
+  {
+    "id": 7,
+    "student_id": 4,
+    "course_id": 1,
     "grade": null
   }
 ]
